@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ibiza Markets Weekly Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;600&family=Jost:wght@300;400;500;600&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #d9bfa9;
+    --cream: #f8efdf;
+    --sage: #b9c9c2;
+    --sage-deep: #a4b8b0;
+    --ink: #2a2522;
+    --soft: #6b5f57;
+    --accent: #8a5a44;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: #c9ad97; }
+  body {
+    font-family: "Jost", system-ui, sans-serif;
+    color: var(--ink);
+    padding: 24px 0;
+  }
+  .page {
+    position: relative;
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto 24px;
+    background: var(--bg);
+    padding: 12mm 12mm 10mm;
+    overflow: hidden;
+    box-shadow: 0 6px 30px rgba(0,0,0,.25);
+  }
+  /* ---------- header ---------- */
+  header { position: relative; height: 34mm; }
+  .title {
+    font-family: "Mrs Saint Delafield", cursive;
+    font-size: 82pt;
+    line-height: .9;
+    position: absolute; left: 0; top: -4mm;
+  }
+  .subtitle {
+    font-family: "Antonio", sans-serif;
+    font-size: 19pt; letter-spacing: .04em;
+    position: absolute; left: 72mm; top: 13mm;
+    text-transform: uppercase;
+  }
+  .daterange {
+    position: absolute; right: 0; top: 2mm;
+    width: 66mm; padding: 3mm 4mm;
+    background: var(--cream);
+    font-family: "Antonio", sans-serif;
+    font-size: 12pt; letter-spacing: .02em; white-space: nowrap;
+    text-transform: uppercase;
+  }
+  .daterange small { display: block; font-family: "Jost"; font-size: 7pt; letter-spacing: .08em; color: var(--soft); }
+  .tagline {
+    position: absolute; right: 0; top: 22mm; width: 66mm;
+    font-size: 7pt; color: var(--soft); text-align: right; letter-spacing: .04em;
+  }
+
+  /* ---------- layout ---------- */
+  .layout { display: flex; gap: 6mm; margin-top: 1mm; height: calc(297mm - 12mm - 10mm - 34mm - 1mm); }
+  .days { flex: 1; display: flex; flex-direction: column; gap: 4.5mm; min-width: 0; }
+  .side { width: 52mm; display: flex; flex-direction: column; gap: 5mm; }
+
+  /* ---------- day cards ---------- */
+  .day { position: relative; flex: 1 1 auto; }
+  .day:nth-child(odd)  { margin-right: 14mm; }
+  .day:nth-child(even) { margin-left: 10mm;  margin-right: 4mm; }
+  .day::before {           /* offset sage panel behind card, like the reference */
+    content: ""; position: absolute; inset: -2mm auto auto -3mm;
+    width: 55%; height: 92%;
+    background: var(--sage);
+  }
+  .day:nth-child(even)::before { left: -2.5mm; top: -2.5mm; width: 48%; }
+  .card {
+    position: relative; height: 100%;
+    background: var(--cream);
+    padding: 2.5mm 4mm 3mm;
+  }
+  .dayhead { display: flex; align-items: baseline; gap: 2.5mm; margin-bottom: 1.2mm; }
+  .dayname {
+    font-family: "Antonio", sans-serif; font-size: 14pt; letter-spacing: .03em;
+    text-transform: uppercase; line-height: 1;
+  }
+  .daydate { font-size: 7.5pt; color: var(--soft); letter-spacing: .08em; text-transform: uppercase; }
+  .empty { font-size: 8pt; color: var(--soft); font-style: italic; }
+
+  .m { padding: 1.3mm 0; border-top: 1px dashed #cdb9a2; }
+  .m:first-of-type { border-top: 0; }
+  .m-top { display: flex; align-items: center; gap: 1.8mm; flex-wrap: wrap; }
+  .m-name { font-weight: 600; font-size: 9pt; }
+  .pill {
+    font-size: 6.3pt; font-weight: 500; letter-spacing: .07em; text-transform: uppercase;
+    padding: .3mm 1.6mm; border-radius: 10mm; background: var(--sage); color: #2f4a42;
+  }
+  .pill.big { background: #c98a6b; color: #fff; }
+  .pill.med { background: #e0b98f; color: #4b321c; }
+  .m-meta { font-size: 7.4pt; color: var(--accent); margin-top: .3mm; }
+  .m-desc { font-size: 7.6pt; line-height: 1.35; color: #3c3531; margin-top: .3mm; }
+  .tip { font-size: 7.2pt; color: var(--soft); font-style: italic; margin-top: .6mm; }
+
+  /* ---------- sidebar ---------- */
+  .panel { background: var(--cream); padding: 2.5mm; }
+  .panel.grow { flex: 1; display: flex; flex-direction: column; }
+  .panel h3 {
+    font-family: "Antonio", sans-serif; font-weight: 400; font-size: 13pt;
+    text-transform: uppercase; letter-spacing: .04em; margin-bottom: 1.5mm;
+  }
+  .lined { background: var(--sage-deep); padding: 1mm 3mm 2mm; flex: 1; font-size: 7.6pt; overflow: hidden; }
+  .lined div { min-height: 6.6mm; display: flex; gap: 1.6mm; align-items: flex-end; padding-bottom: .5mm; border-bottom: 1.5px solid #2a2522; line-height: 1.25; }
+  .lined i { width: 2.6mm; height: 2.6mm; border: 1px solid #2a2522; flex: none; margin-bottom: .8mm; }
+  .lined b { font-weight: 500; }
+  .sidenote { font-size: 7.4pt; line-height: 1.4; color: var(--soft); margin-top: 2mm; }
+
+  .legend { margin-top: auto; display: flex; gap: 1.5mm; flex-wrap: wrap; font-size: 6.5pt; color: var(--soft); align-items: center; }
+
+  /* ---------- botanicals ---------- */
+  .flora { position: absolute; pointer-events: none; fill: none; stroke: #1e1a18; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+
+  .footer { position: absolute; left: 12mm; bottom: 4mm; font-size: 6.5pt; color: var(--soft); letter-spacing: .05em; }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    html, body { background: none; padding: 0; }
+    .page { margin: 0; box-shadow: none; page-break-after: always; break-after: page; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- reusable line-art sprigs -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="sprig" viewBox="0 0 60 140">
+      <path d="M30 138 C30 100 28 70 30 30"/>
+      <path d="M30 100 C18 92 12 82 10 70 C22 74 28 86 30 100Z"/>
+      <path d="M30 80 C42 72 50 62 50 50 C38 54 31 66 30 80Z"/>
+      <path d="M30 58 C20 52 16 44 16 34 C25 38 29 46 30 58Z"/>
+      <path d="M30 30 C26 20 28 10 30 4 C34 10 35 20 30 30Z"/>
+    </symbol>
+    <symbol id="daisy" viewBox="0 0 70 150">
+      <path d="M35 148 C33 110 36 80 35 42"/>
+      <path d="M35 105 C24 98 16 100 10 108 C20 112 30 112 35 105Z"/>
+      <path d="M35 84 C46 76 54 78 60 86 C50 90 40 90 35 84Z"/>
+      <circle cx="35" cy="34" r="6"/>
+      <path d="M35 28 C30 18 32 8 35 4 C38 8 40 18 35 28Z"/>
+      <path d="M35 40 C30 50 32 60 35 64 C38 60 40 50 35 40Z"/>
+      <path d="M29 34 C19 30 10 32 6 35 C10 38 19 40 29 34Z"/>
+      <path d="M41 34 C51 30 60 32 64 35 C60 38 51 40 41 34Z"/>
+      <path d="M31 29 C25 22 20 16 19 12 C24 13 30 19 31 29Z"/>
+      <path d="M39 29 C45 22 50 16 51 12 C46 13 40 19 39 29Z"/>
+      <path d="M31 39 C25 46 20 52 19 56 C24 55 30 49 31 39Z"/>
+      <path d="M39 39 C45 46 50 52 51 56 C46 55 40 49 39 39Z"/>
+    </symbol>
+    <symbol id="buds" viewBox="0 0 80 130">
+      <path d="M40 128 C40 100 38 70 40 40"/>
+      <path d="M40 90 C52 76 60 60 64 40"/>
+      <path d="M40 70 C30 56 22 44 18 30"/>
+      <circle cx="40" cy="34" r="5"/><circle cx="64" cy="34" r="5"/><circle cx="18" cy="24" r="5"/>
+      <circle cx="40" cy="22" r="3"/><circle cx="56" cy="44" r="3"/><circle cx="26" cy="42" r="3"/>
+      <path d="M40 104 C30 98 24 100 20 106 C28 110 36 110 40 104Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div id="pages"></div>
+
+<script>
+const DAYS = [
+  { n: "Wednesday", d: "30 Sep", m: [
+    { name: "Punta Arabí", where: "Es Caná", time: "10:00–19:00", size: "big", label: "400+ stalls",
+      desc: "Oldest & largest on the island: jewellery, fashion, leather, ceramics, organic cosmetics, hierbas. Runs to 29 Oct.",
+      tip: "Go today if you can." } ]},
+  { n: "Thursday", d: "1 Oct", m: [
+    { name: "Cala Llonga", where: "Seafront promenade", time: "≈18:00–22:30", size: "small", label: "Small",
+      desc: "Artisan fashion and jewellery by the sea, with live music." } ]},
+  { n: "Friday", d: "2 Oct", m: [
+    { name: "Mercat de sa Cooperativa", where: "San Antonio", time: "9:00–14:00", size: "small", label: "Small",
+      desc: "Farm produce, fresh bread and organic goods. Go in the morning." },
+    { name: "Ibiza Town port stalls", where: "Ibiza Town", time: "Evening", size: "small", label: "≈20 stalls",
+      desc: "Daily street market along the port, open May–Oct." } ]},
+  { n: "Saturday", d: "3 Oct", busy: true, m: [
+    { name: "Sant Jordi flea market", where: "Sant Jordi", time: "8:00–15:00", size: "big", label: "Big",
+      desc: "Second-hand books, clothes, furniture, plants and bric-a-brac; drummers at midday.", tip: "Start here at 8:00." },
+    { name: "San José", where: "Main road, San José", time: "10:00–14:00", size: "med", label: "Small–medium",
+      desc: "Organic produce and crafts. Season ends early Oct, so this may be the last one.", tip: "≈10:30 · if ended, swap in Forada." },
+    { name: "Forada (backup)", where: "Near San Rafael", time: "10:00–15:00", size: "small", label: "Small",
+      desc: "Hierbas, cosmetics, jam, honey, art and vegan paella." },
+    { name: "Las Dalias", where: "San Carlos", time: "from 10:00", size: "big", label: "≈200 stalls",
+      desc: "Handmade fashion, salt, aloe products, hierbas, food and live music.", tip: "Afternoon. Hard to reach without a car." } ]},
+  { n: "Sunday", d: "4 Oct", m: [
+    { name: "San Juan", where: "San Juan village", time: "9:00–16:00", size: "big", label: "Large",
+      desc: "Local food & drink, handicrafts, art and hippy clothes; live bands from noon.", tip: "Morning." },
+    { name: "Las Dalias", where: "San Carlos", time: "from 11:00", size: "big", label: "Big",
+      desc: "Sunday edition restarts today. Skip if you went on Saturday." } ]},
+  { n: "Monday", d: "5 Oct", m: [
+    { name: "No big markets today", quiet: true,
+      desc: "Stroll the Santa Eulalia promenade in the morning, or head to Cala Benirràs (open daily except Wed & Thu)." } ]},
+  { n: "Tuesday", d: "6 Oct", m: [
+    { name: "No big markets today", quiet: true,
+      desc: "Santa Eulalia promenade in the morning, or Cala Benirràs. Both open today." } ]},
+  { n: "Wednesday", d: "7 Oct", m: [
+    { name: "Punta Arabí", where: "Es Caná", time: "10:00–19:00", size: "big", label: "400+ stalls",
+      desc: "Second visit to the island's oldest & largest hippy market.",
+      tip: "Or plan Formentera tomorrow instead." } ]},
+  { n: "Thursday", d: "8 Oct", m: [
+    { name: "Cala Llonga", where: "Seafront promenade", time: "≈18:00–22:30", size: "small", label: "Small",
+      desc: "Artisan fashion, jewellery and live music on the promenade." },
+    { name: "Formentera (alt.)", where: "Sant Francesc", time: "Day trip", size: "small", label: "Small",
+      desc: "Thursday market in Sant Francesc, if you'd rather take the ferry." } ]},
+  { n: "Friday", d: "9 Oct", m: [
+    { name: "Mercat de sa Cooperativa", where: "San Antonio", time: "9:00–14:00", size: "small", label: "Small",
+      desc: "Farm produce, fresh bread and organic goods — last stop before you leave.",
+      tip: "Formentera farmers' market runs Fridays too." } ]}
+];
+
+const FLORA = {
+  p1: `<svg class="flora" style="left:-3mm;top:108mm;width:26mm;height:60mm;transform:rotate(-10deg)"><use href="#sprig"/></svg>
+       <svg class="flora" style="right:70mm;top:8mm;width:14mm;height:30mm"><use href="#daisy"/></svg>
+       <svg class="flora" style="right:4mm;bottom:12mm;width:26mm;height:48mm"><use href="#buds"/></svg>
+       <svg class="flora" style="left:-2mm;bottom:-4mm;width:30mm;height:70mm;transform:rotate(8deg)"><use href="#sprig"/></svg>`,
+  p2: `<svg class="flora" style="left:-3mm;top:96mm;width:26mm;height:60mm;transform:rotate(-8deg)"><use href="#sprig"/></svg>
+       <svg class="flora" style="right:70mm;top:8mm;width:16mm;height:30mm"><use href="#buds"/></svg>
+       <svg class="flora" style="right:3mm;bottom:10mm;width:24mm;height:52mm"><use href="#daisy"/></svg>
+       <svg class="flora" style="left:-2mm;bottom:-4mm;width:30mm;height:70mm;transform:rotate(6deg)"><use href="#sprig"/></svg>`
+};
+
+const esc = s => s;
+function dayHTML(day) {
+  const items = day.m.map(m => {
+    if (m.quiet) return `<div class="m"><div class="empty">${m.name}</div><div class="m-desc">${m.desc}</div></div>`;
+    return `<div class="m">
+      <div class="m-top"><span class="m-name">${m.name}</span><span class="pill ${m.size}">${m.label}</span></div>
+      <div class="m-meta">${m.where} · ${m.time}</div>
+      <div class="m-desc">${m.desc}</div>
+      ${m.tip ? `<div class="tip">→ ${m.tip}</div>` : ""}
+    </div>`;
+  }).join("");
+  const grow = day.busy ? 2.6 : day.m.length > 1 ? 1.5 : 1;
+  return `<section class="day" style="flex-grow:${grow}"><div class="card">
+    <div class="dayhead"><span class="dayname">${day.n}</span><span class="daydate">${day.d}</span></div>${items}</div></section>`;
+}
+
+function page(range, days, side, flora, pageNo) {
+  return `<div class="page">
+    ${flora}
+    <header>
+      <div class="title">Weekly</div><div class="subtitle">Planner</div>
+      <div class="daterange"><small>Ibiza markets</small>${range}</div>
+      <div class="tagline">Times & dates can change late in the season</div>
+    </header>
+    <div class="layout">
+      <div class="days">${days.map(dayHTML).join("")}</div>
+      <aside class="side">${side}</aside>
+    </div>
+    <div class="footer">Page ${pageNo} / 2 · Ibiza Markets 30 Sep – 9 Oct</div>
+  </div>`;
+}
+
+const legend = `<div class="legend"><span class="pill big">Big</span><span class="pill med">Medium</span><span class="pill">Small</span></div>`;
+
+const side1 = `
+  <div class="panel grow"><h3>To do</h3><div class="lined">
+    <div><i></i><b>Check Las Dalias website</b></div>
+    <div><i></i><b>Check @hippymarketibz</b></div>
+    <div class="wrap"><i></i><b>Car or taxi for Las Dalias &amp; Punta Arabí</b></div>
+    <div><i></i><b>Cash for small stalls</b></div>
+    <div class="wrap"><i></i><b>Sat 3 Oct: Sant Jordi 8:00 → San José → Las Dalias</b></div>
+    <div><i></i></div><div><i></i></div><div><i></i></div>
+  ${'<div></div>'.repeat(14)}</div>${legend}</div>`;
+
+const side2 = `
+  <div class="panel grow"><h3>Notes</h3><div class="lined">
+    <div class="wrap"><b>Daily evening markets (May–Oct):</b></div>
+    <div class="wrap"><b>Ibiza Town port, San Antonio, Playa d'en Bossa, Figueretas</b></div>
+    <div class="wrap"><b>Santa Eulalia: mornings, not Wed &amp; Sun</b></div>
+    <div class="wrap"><b>Cala Benirràs: daily, not Wed &amp; Thu</b></div>
+    <div class="wrap"><b>Formentera: Thu Sant Francesc · Fri farmers'</b></div>
+  ${'<div></div>'.repeat(14)}</div>${legend}</div>`;
+
+document.getElementById("pages").innerHTML =
+  page("Wed 30 Sep – Sun 4 Oct", DAYS.slice(0, 5), side1, FLORA.p1, 1) +
+  page("Mon 5 – Fri 9 Oct", DAYS.slice(5), side2, FLORA.p2, 2);
+</script>
+</body>
+</html>
