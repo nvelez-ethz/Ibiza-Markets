@@ -37,19 +37,19 @@
   header { position: relative; height: 34mm; }
   .title {
     font-family: "Mrs Saint Delafield", cursive;
-    font-size: 82pt;
+    font-size: 66pt;
     line-height: .9;
-    position: absolute; left: 0; top: -4mm;
+    position: absolute; left: 0; top: -4mm; white-space: nowrap;
   }
   .subtitle {
     font-family: "Antonio", sans-serif;
-    font-size: 19pt; letter-spacing: .04em;
-    position: absolute; left: 72mm; top: 13mm;
-    text-transform: uppercase;
+    font-size: 15pt; letter-spacing: .12em;
+    position: absolute; left: 4mm; top: 26mm;
+    text-transform: uppercase; white-space: nowrap;
   }
   .daterange {
-    position: absolute; right: 0; top: 2mm;
-    width: 66mm; padding: 3mm 4mm;
+    position: absolute; right: 0; top: 21mm;
+    width: 66mm; padding: 1.5mm 4mm;
     background: var(--cream);
     font-family: "Antonio", sans-serif;
     font-size: 12pt; letter-spacing: .02em; white-space: nowrap;
@@ -64,12 +64,12 @@
   /* ---------- layout ---------- */
   .layout { display: flex; gap: 6mm; margin-top: 1mm; height: calc(297mm - 12mm - 14mm - 34mm - 1mm); }
   .days { flex: 1; display: flex; flex-direction: column; gap: 4.5mm; min-width: 0; }
-  .side { width: 52mm; display: flex; flex-direction: column; gap: 5mm; }
+  .ms { display: grid; grid-template-columns: repeat(auto-fit, minmax(62mm, 1fr)); column-gap: 6mm; }
 
   /* ---------- day cards ---------- */
   .day { position: relative; flex: 1 1 auto; }
-  .day:nth-child(odd)  { margin-right: 14mm; }
-  .day:nth-child(even) { margin-left: 10mm;  margin-right: 4mm; }
+  .day:nth-child(odd)  { margin-right: 20mm; }
+  .day:nth-child(even) { margin-left: 12mm;  margin-right: 4mm; }
   .day::before {           /* offset sage panel behind card, like the reference */
     content: ""; position: absolute; inset: -2mm auto auto -3mm;
     width: 55%; height: 92%;
@@ -83,25 +83,25 @@
   }
   .dayhead { display: flex; align-items: baseline; gap: 2.5mm; margin-bottom: 1.2mm; }
   .dayname {
-    font-family: "Antonio", sans-serif; font-size: 14pt; letter-spacing: .03em;
+    font-family: "Antonio", sans-serif; font-size: 17pt; letter-spacing: .03em;
     text-transform: uppercase; line-height: 1;
   }
-  .daydate { font-size: 7.5pt; color: var(--soft); letter-spacing: .08em; text-transform: uppercase; }
-  .empty { font-size: 8pt; color: var(--soft); font-style: italic; }
+  .daydate { font-size: 8.5pt; color: var(--soft); letter-spacing: .08em; text-transform: uppercase; }
+  .empty { font-size: 9.5pt; color: var(--soft); font-style: italic; }
 
   .m { padding: 1.3mm 0; border-top: 1px dashed #cdb9a2; }
-  .m:first-of-type { border-top: 0; }
+  .ms > .m:nth-child(-n+2) { border-top: 0; }
   .m-top { display: flex; align-items: center; gap: 1.8mm; flex-wrap: wrap; }
-  .m-name { font-weight: 600; font-size: 9pt; }
+  .m-name { font-weight: 600; font-size: 10.5pt; }
   .pill {
-    font-size: 6.3pt; font-weight: 500; letter-spacing: .07em; text-transform: uppercase;
+    font-size: 7pt; font-weight: 500; letter-spacing: .07em; text-transform: uppercase;
     padding: .3mm 1.6mm; border-radius: 10mm; background: var(--sage); color: #2f4a42;
   }
   .pill.big { background: #c98a6b; color: #fff; }
   .pill.med { background: #e0b98f; color: #4b321c; }
-  .m-meta { font-size: 7.4pt; color: var(--accent); margin-top: .3mm; }
-  .m-desc { font-size: 7.6pt; line-height: 1.35; color: #3c3531; margin-top: .3mm; }
-  .tip { font-size: 7.2pt; color: var(--soft); font-style: italic; margin-top: .6mm; }
+  .m-meta { font-size: 8.4pt; color: var(--accent); margin-top: .3mm; }
+  .m-desc { font-size: 8.8pt; line-height: 1.35; color: #3c3531; margin-top: .3mm; }
+  .tip { font-size: 8.2pt; color: var(--soft); font-style: italic; margin-top: .6mm; }
 
   /* ---------- sidebar ---------- */
   .panel { background: var(--cream); padding: 2.5mm; }
@@ -116,7 +116,7 @@
   .lined b { font-weight: 500; }
   .sidenote { font-size: 7.4pt; line-height: 1.4; color: var(--soft); margin-top: 2mm; }
 
-  .legend { margin-top: auto; display: flex; gap: 1.5mm; flex-wrap: wrap; font-size: 6.5pt; color: var(--soft); align-items: center; }
+  .legend { position: absolute; right: 12mm; bottom: 4mm; display: flex; gap: 1.5mm; flex-wrap: wrap; font-size: 6.5pt; color: var(--soft); align-items: center; }
 
   /* ---------- botanicals ---------- */
   .flora { position: absolute; pointer-events: none; fill: none; stroke: #1e1a18; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
@@ -221,12 +221,12 @@ const DAYS = [
 
 const FLORA = {
   p1: `<svg class="flora" style="left:-3mm;top:108mm;width:26mm;height:60mm;transform:rotate(-10deg)"><use href="#sprig"/></svg>
-       <svg class="flora" style="right:70mm;top:8mm;width:14mm;height:30mm"><use href="#daisy"/></svg>
-       <svg class="flora" style="right:4mm;bottom:12mm;width:26mm;height:48mm"><use href="#buds"/></svg>
+       <svg class="flora" style="right:6mm;top:0mm;width:13mm;height:28mm"><use href="#daisy"/></svg>
+       <svg class="flora" style="right:1mm;bottom:8mm;width:17mm;height:40mm"><use href="#buds"/></svg>
        <svg class="flora" style="left:-2mm;bottom:-4mm;width:30mm;height:70mm;transform:rotate(8deg)"><use href="#sprig"/></svg>`,
   p2: `<svg class="flora" style="left:-3mm;top:96mm;width:26mm;height:60mm;transform:rotate(-8deg)"><use href="#sprig"/></svg>
-       <svg class="flora" style="right:70mm;top:8mm;width:16mm;height:30mm"><use href="#buds"/></svg>
-       <svg class="flora" style="right:3mm;bottom:10mm;width:24mm;height:52mm"><use href="#daisy"/></svg>
+       <svg class="flora" style="right:6mm;top:0mm;width:15mm;height:28mm"><use href="#buds"/></svg>
+       <svg class="flora" style="right:1mm;bottom:10mm;width:16mm;height:40mm"><use href="#daisy"/></svg>
        <svg class="flora" style="left:-2mm;bottom:-4mm;width:30mm;height:70mm;transform:rotate(6deg)"><use href="#sprig"/></svg>`
 };
 
@@ -243,49 +243,30 @@ function dayHTML(day) {
   }).join("");
   const grow = day.busy ? 2.6 : day.m.length > 1 ? 1.5 : 1;
   return `<section class="day" style="flex-grow:${grow}"><div class="card">
-    <div class="dayhead"><span class="dayname">${day.n}</span><span class="daydate">${day.d}</span></div>${items}</div></section>`;
+    <div class="dayhead"><span class="dayname">${day.n}</span><span class="daydate">${day.d}</span></div><div class="ms">${items}</div></div></section>`;
 }
 
-function page(range, days, side, flora, pageNo) {
+function page(label, range, days, flora, pageNo) {
   return `<div class="page">
     ${flora}
     <header>
-      <div class="title">Weekly</div><div class="subtitle">Planner</div>
-      <div class="daterange"><small>Ibiza markets</small>${range}</div>
-      <div class="tagline">Times & dates can change late in the season</div>
+      <div class="title">Ibiza Markets</div><div class="subtitle">30 Sept – 9 Oct</div>
+      <div class="daterange"><small>${label}</small>${range}</div>
+      
     </header>
     <div class="layout">
       <div class="days">${days.map(dayHTML).join("")}</div>
-      <aside class="side">${side}</aside>
+      
     </div>
-    <div class="footer">Page ${pageNo} / 2 · Ibiza Markets 30 Sep – 9 Oct</div>
+    <div class="footer">Page ${pageNo} / 2 · Ibiza Markets 30 Sept – 9 Oct · Times &amp; dates can change late in the season</div>${legend}
   </div>`;
 }
 
 const legend = `<div class="legend"><span class="pill big">Big</span><span class="pill med">Medium</span><span class="pill">Small</span></div>`;
 
-const side1 = `
-  <div class="panel grow"><h3>To do</h3><div class="lined">
-    <div><i></i><b>Check Las Dalias website</b></div>
-    <div><i></i><b>Check @hippymarketibz</b></div>
-    <div class="wrap"><i></i><b>Car or taxi for Las Dalias &amp; Punta Arabí</b></div>
-    <div><i></i><b>Cash for small stalls</b></div>
-    <div class="wrap"><i></i><b>Sat 3 Oct: Sant Jordi 8:00 → San José → Las Dalias</b></div>
-    <div><i></i></div><div><i></i></div><div><i></i></div>
-  ${'<div></div>'.repeat(14)}</div>${legend}</div>`;
-
-const side2 = `
-  <div class="panel grow"><h3>Notes</h3><div class="lined">
-    <div class="wrap"><b>Daily evening markets (May–Oct):</b></div>
-    <div class="wrap"><b>Ibiza Town port, San Antonio, Playa d'en Bossa, Figueretas</b></div>
-    <div class="wrap"><b>Santa Eulalia: mornings, not Wed &amp; Sun (few stalls Sat)</b></div>
-    <div class="wrap"><b>Cala Benirràs: daily, not Wed &amp; Thu</b></div>
-    <div class="wrap"><b>Formentera: Sant Francesc market daily · farmers' market Mon, Tue, Fri, Sat 9–13</b></div>
-  ${'<div></div>'.repeat(14)}</div>${legend}</div>`;
-
 document.getElementById("pages").innerHTML =
-  page("Wed 30 Sep – Sun 4 Oct", DAYS.slice(0, 5), side1, FLORA.p1, 1) +
-  page("Mon 5 – Fri 9 Oct", DAYS.slice(5), side2, FLORA.p2, 2);
+  page("Week 1", "Wed 30 Sep – Sun 4 Oct", DAYS.slice(0, 5), FLORA.p1, 1) +
+  page("Week 2", "Mon 5 – Fri 9 Oct", DAYS.slice(5), FLORA.p2, 2);
 </script>
 </body>
 </html>
