@@ -62,7 +62,7 @@
   }
 
   /* ---------- layout ---------- */
-  .layout { display: flex; gap: 6mm; margin-top: 1mm; height: calc(297mm - 12mm - 10mm - 34mm - 1mm); }
+  .layout { display: flex; gap: 6mm; margin-top: 1mm; height: calc(297mm - 12mm - 14mm - 34mm - 1mm); }
   .days { flex: 1; display: flex; flex-direction: column; gap: 4.5mm; min-width: 0; }
   .side { width: 52mm; display: flex; flex-direction: column; gap: 5mm; }
 
@@ -121,7 +121,7 @@
   /* ---------- botanicals ---------- */
   .flora { position: absolute; pointer-events: none; fill: none; stroke: #1e1a18; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
 
-  .footer { position: absolute; left: 12mm; bottom: 4mm; font-size: 6.5pt; color: var(--soft); letter-spacing: .05em; }
+  .footer { position: absolute; left: 12mm; bottom: 4.5mm; font-size: 6.5pt; color: var(--soft); letter-spacing: .05em; }
 
   @page { size: A4; margin: 0; }
   @media print {
@@ -173,31 +173,31 @@
 <script>
 const DAYS = [
   { n: "Wednesday", d: "30 Sep", m: [
-    { name: "Punta Arabí", where: "Es Caná", time: "10:00–19:00", size: "big", label: "400+ stalls",
-      desc: "Oldest & largest on the island: jewellery, fashion, leather, ceramics, organic cosmetics, hierbas. Runs to 29 Oct.",
-      tip: "Go today if you can." } ]},
+    { name: "Punta Arabí", where: "Es Caná", time: "10:00–≈19:00", size: "big", label: "400+ stalls",
+      desc: "Oldest & largest on the island (since 1973): jewellery, fashion, leather, ceramics, organic cosmetics, hierbas, drummers. Runs to end of Oct.",
+      tip: "Go today if you can. Closing time varies by source (18:00–19:00)." } ]},
   { n: "Thursday", d: "1 Oct", m: [
     { name: "Cala Llonga", where: "Seafront promenade", time: "≈18:00–22:30", size: "small", label: "Small",
       desc: "Artisan fashion and jewellery by the sea, with live music." } ]},
   { n: "Friday", d: "2 Oct", m: [
-    { name: "Mercat de sa Cooperativa", where: "San Antonio", time: "9:00–14:00", size: "small", label: "Small",
+    { name: "Mercat de sa Cooperativa", where: "San Antonio, near Lidl", time: "9:00–14:00", size: "med", label: "Medium",
       desc: "Farm produce, fresh bread and organic goods. Go in the morning." },
-    { name: "Ibiza Town port stalls", where: "Ibiza Town", time: "Evening", size: "small", label: "≈20 stalls",
+    { name: "Ibiza Town port stalls", where: "Plaza Antoni Riquer, old port", time: "Evening", size: "small", label: "≈20 stalls",
       desc: "Daily street market along the port, open May–Oct." } ]},
   { n: "Saturday", d: "3 Oct", busy: true, m: [
-    { name: "Sant Jordi flea market", where: "Sant Jordi", time: "8:00–15:00", size: "big", label: "Big",
+    { name: "Sant Jordi flea market", where: "Hipódromo, Sant Jordi", time: "8:00–15:00", size: "big", label: "Big",
       desc: "Second-hand books, clothes, furniture, plants and bric-a-brac; drummers at midday.", tip: "Start here at 8:00." },
     { name: "San José", where: "Main road, San José", time: "10:00–14:00", size: "med", label: "Small–medium",
-      desc: "Organic produce and crafts. Season ends early Oct, so this may be the last one.", tip: "≈10:30 · if ended, swap in Forada." },
-    { name: "Forada (backup)", where: "Near San Rafael", time: "10:00–15:00", size: "small", label: "Small",
+      desc: "Organic produce and crafts along the main road. 2026 season ends 3 Oct, so this is the last one of the year.", tip: "≈10:30 · then on to Las Dalias." },
+    { name: "Forada (alternative)", where: "Can Tixedo Art Café, San Rafael", time: "10:00–15:00", size: "small", label: "Small",
       desc: "Hierbas, cosmetics, jam, honey, art and vegan paella." },
-    { name: "Las Dalias", where: "San Carlos", time: "from 10:00", size: "big", label: "≈200 stalls",
-      desc: "Handmade fashion, salt, aloe products, hierbas, food and live music.", tip: "Afternoon. Hard to reach without a car." } ]},
+    { name: "Las Dalias", where: "San Carlos", time: "10:00–≈19:00", size: "big", label: "300+ stalls",
+      desc: "Handmade fashion and jewellery, hierbas, food, Arabian tea tent and live music. Open until ≈19:00 in Oct.", tip: "Afternoon. Hard to reach without a car." } ]},
   { n: "Sunday", d: "4 Oct", m: [
     { name: "San Juan", where: "San Juan village", time: "9:00–16:00", size: "big", label: "Large",
       desc: "Local food & drink, handicrafts, art and hippy clothes; live bands from noon.", tip: "Morning." },
-    { name: "Las Dalias", where: "San Carlos", time: "from 11:00", size: "big", label: "Big",
-      desc: "Sunday edition restarts today. Skip if you went on Saturday." } ]},
+    { name: "Las Dalias", where: "San Carlos", time: "11:00–≈18:00", size: "big", label: "300+ stalls",
+      desc: "Sunday edition restarts today (4 Oct). Skip if you went on Saturday." } ]},
   { n: "Monday", d: "5 Oct", m: [
     { name: "No big markets today", quiet: true,
       desc: "Stroll the Santa Eulalia promenade in the morning, or head to Cala Benirràs (open daily except Wed & Thu)." } ]},
@@ -205,18 +205,18 @@ const DAYS = [
     { name: "No big markets today", quiet: true,
       desc: "Santa Eulalia promenade in the morning, or Cala Benirràs. Both open today." } ]},
   { n: "Wednesday", d: "7 Oct", m: [
-    { name: "Punta Arabí", where: "Es Caná", time: "10:00–19:00", size: "big", label: "400+ stalls",
+    { name: "Punta Arabí", where: "Es Caná", time: "10:00–≈19:00", size: "big", label: "400+ stalls",
       desc: "Second visit to the island's oldest & largest hippy market.",
-      tip: "Or plan Formentera tomorrow instead." } ]},
+      tip: "Or take a Formentera day trip instead (Sant Francesc market is daily)." } ]},
   { n: "Thursday", d: "8 Oct", m: [
     { name: "Cala Llonga", where: "Seafront promenade", time: "≈18:00–22:30", size: "small", label: "Small",
       desc: "Artisan fashion, jewellery and live music on the promenade." },
-    { name: "Formentera (alt.)", where: "Sant Francesc", time: "Day trip", size: "small", label: "Small",
-      desc: "Thursday market in Sant Francesc, if you'd rather take the ferry." } ]},
+    { name: "Formentera (alt.)", where: "Sant Francesc", time: "10–14 & 17–23", size: "small", label: "Small",
+      desc: "Daily craft/flea market, if you'd rather take the ferry." } ]},
   { n: "Friday", d: "9 Oct", m: [
-    { name: "Mercat de sa Cooperativa", where: "San Antonio", time: "9:00–14:00", size: "small", label: "Small",
+    { name: "Mercat de sa Cooperativa", where: "San Antonio, near Lidl", time: "9:00–14:00", size: "med", label: "Medium",
       desc: "Farm produce, fresh bread and organic goods — last stop before you leave.",
-      tip: "Formentera farmers' market runs Fridays too." } ]}
+      tip: "Formentera farmers' market runs Fridays too (9–13)." } ]}
 ];
 
 const FLORA = {
@@ -278,9 +278,9 @@ const side2 = `
   <div class="panel grow"><h3>Notes</h3><div class="lined">
     <div class="wrap"><b>Daily evening markets (May–Oct):</b></div>
     <div class="wrap"><b>Ibiza Town port, San Antonio, Playa d'en Bossa, Figueretas</b></div>
-    <div class="wrap"><b>Santa Eulalia: mornings, not Wed &amp; Sun</b></div>
+    <div class="wrap"><b>Santa Eulalia: mornings, not Wed &amp; Sun (few stalls Sat)</b></div>
     <div class="wrap"><b>Cala Benirràs: daily, not Wed &amp; Thu</b></div>
-    <div class="wrap"><b>Formentera: Thu Sant Francesc · Fri farmers'</b></div>
+    <div class="wrap"><b>Formentera: Sant Francesc market daily · farmers' market Mon, Tue, Fri, Sat 9–13</b></div>
   ${'<div></div>'.repeat(14)}</div>${legend}</div>`;
 
 document.getElementById("pages").innerHTML =
